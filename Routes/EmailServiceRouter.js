@@ -68,9 +68,10 @@ const scheduleEmails = async () => {
     return;
 }
 
-router.get('/', (req, res) => {
+router.get('/', async (req, res) => {
     console.log("scheduler is running");
-    scheduleEmails();
+    await scheduleEmails();
+    res.status(200).json('Emails sent successfully');
 });
 
 module.exports = router;
