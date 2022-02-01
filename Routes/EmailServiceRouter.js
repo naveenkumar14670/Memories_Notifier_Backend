@@ -59,19 +59,24 @@ const scheduleEmails = async () => {
         if (cardsData[i].email === cardsData[i - 1].email)
             currentCards.push(cardsData[i]);
         else {
-            sendEmail(currentCards);
+            await sendEmail(currentCards);
             currentCards = [];
             currentCards.push(cardsData[i]);
         }
     }
-    sendEmail(currentCards);
+    await sendEmail(currentCards);
     return;
 }
 
 router.get('/', async (req, res) => {
     console.log("scheduler is running");
-    await scheduleEmails();
-    res.status(200).json('Emails sent successfully');
+    try {
+        await scheduleEmails();
+        res.status(200).json('Emails Sent Successfully');
+    }
+    catch (err) {
+        res.status(400).json({ message: 'Failed to send Emails', err });
+    }
 });
 
 module.exports = router;
