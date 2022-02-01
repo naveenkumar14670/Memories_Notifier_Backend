@@ -68,6 +68,7 @@ const scheduleEmails = async () => {
     return;
 }
 
-cron.schedule('0 0 6 * * *', () => {
+cron.schedule('0 55 10 * * *', () => {
+    console.log("scheduler is running");
     scheduleEmails();
 });
