@@ -1,5 +1,5 @@
 const axios = require('axios');
-const cron = require('node-cron');
+const router = require('express').Router();
 require('dotenv').config();
 
 const checkDOB = (card) => {
@@ -68,9 +68,9 @@ const scheduleEmails = async () => {
     return;
 }
 
-cron.schedule('0 55 10 * * *', () => {
+router.get('/', (req, res) => {
     console.log("scheduler is running");
     scheduleEmails();
 });
 
-scheduleEmails();
+module.exports = router;
