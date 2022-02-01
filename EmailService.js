@@ -72,3 +72,5 @@ cron.schedule('0 55 10 * * *', () => {
     console.log("scheduler is running");
     scheduleEmails();
 });
+
+scheduleEmails();
